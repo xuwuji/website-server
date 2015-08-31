@@ -1,0 +1,207 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Wuji,Xu Home</title>
+		<link rel="stylesheet" href="{% static "css/index.css" %}">
+		<link rel="stylesheet" href="{% static "css/index_bootstrap.css" %}">
+		<link rel="stylesheet" href="{% static "css/index_style.css?v=1.6"%}" >
+		<link rel="stylesheet" href="{% static "css/style.css" %}">
+		<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+		<link rel="stylesheet" href="{% static "css/swipebox.css"%}" >
+		<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "js/jquery.swipebox.min.js"%}"></script>
+		<script>
+		$(document).ready(function () {
+		    size_li = $("#myList li").size();
+		    x=3;
+		    $('#myList li:lt('+x+')').show();
+		    $('#loadMore').click(function () {
+		        x= (x+1 <= size_li) ? x+1 : size_li;
+		        $('#myList li:lt('+x+')').show();
+		    });
+		    $('#showLess').click(function () {
+		        x=(x-1<0) ? 1 : x-1;
+		        $('#myList li').not(':lt('+x+')').hide();
+		    });
+		});
+	</script>
+
+		<!-- web-font -->
+	
+		<!-- web-font -->
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	</head>
+<!--my skill-->
+<body>
+<div class="my-skills text-center">
+	<div class="container">
+		<h3>MY SKILLS</h3>
+		<div class="strip text-center"><img src="{% static "images/skill.png" %}" alt=" "/></div>
+		<div class="skill-grids">
+					<div class="col-md-2 skills-grid text-center">
+						<div class="circle" id="circles-1"></div>
+						<p>Html/CSS</p>
+					</div>
+					<div class="col-md-2 skills-grid text-center">
+						<div class="circle" id="circles-2"></div>
+						<p>Python</p>
+					</div>
+					<div class="col-md-2 skills-grid text-center">
+						<div class="circle" id="circles-3"></div>
+						<p>Hadoop</p>
+					</div>
+					<div class="col-md-2 skills-grid text-center">
+						<div class="circle" id="circles-4"></div>
+						<p>DataBase</p>
+					</div>
+					<div class="col-md-2 skills-grid text-center">
+						<div class="circle" id="circles-5"></div>
+						<p>Java Web</p>
+					</div>
+					<div class="col-md-2 skills-grid text-center">
+						<div class="circle" id="circles-6"></div>
+						<p>Java</p>
+					</div>
+					<div class="clearfix"> </div>
+				 <script type="text/javascript" src="{% static "js/circles.js"%}"></script>
+					         <script>
+								var colors = [
+										['#6ed4c0', '#ffffff'], ['#6ed4c0', '#ffffff'], ['#6ed4c0', '#ffffff'], ['#6ed4c0', '#ffffff'], ['#6ed4c0', '#ffffff'], ['#6ed4c0', '#ffffff']
+									];
+								for (var i = 1; i <= 7; i++) {
+									var child = document.getElementById('circles-' + i),
+										percentage = 30 + (i * 10);
+										
+									Circles.create({
+										id:         child.id,
+										percentage: percentage,
+										radius:     80,
+										width:      10,
+										number:   	percentage / 1,
+										text:       '%',
+										colors:     colors[i - 1]
+									});
+								}
+						
+				</script>
+		</div>
+	</div>	
+</div>
+<!--//my skill-->
+
+
+<!--//content-->
+
+<div class="content">
+	<div class="container">
+	 	<div class="load_more">	
+			     
+			     <ul id="myList">
+
+				
+
+
+				
+
+
+
+
+
+
+
+
+			     	{% for group in list  %}
+			     	<li>
+			     		
+			     		<div class="l_g">
+			     			{% for post in group %}
+							<div class="col-md-3 praesent">
+								<div class="l_g_r">
+									<div class="integer">
+										<h3>{{ post.title }}</h3>
+										<p class="adm">{{ post.published_date }}</p>
+										<a href="details.html"><img src="images/img5.jpg" class="img-responsive" alt=""></a>
+										<p>{{ post.introduction }}</p>
+										<<a href="{% url "post_detail" pk=post.pk %}">Read More</a>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					{% endfor %}				
+			     </ul>		
+
+
+	 			<div id="loadMore">Load more</div>
+				<div id="showLess">Show less</div>
+
+		</div>
+	</div>
+</div>
+
+<!--//content-->
+
+
+
+
+
+<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="col-md-3 copy">
+				<div class="top1">
+					<i class="ham"></i>
+				</div>
+				<div class="top2">
+					<h6>Copyrights © 2015 Graphic</h6>
+					<p>All rights reserved</p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-3 copy">
+				<div class="top1">
+					<i class="men"></i>
+				</div>
+				<div class="top2">
+					<h6>Template by: </h6>
+					<p><a href="http://w3layouts.com/">W3layouts</a></p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-3 copy">
+				<div class="top1">
+					<i class="app"></i>
+				</div>
+				<div class="top2">
+					<h6>Images From: </h6>
+					<p><a href="#"> www.wallcoo.net</a></p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-3 copy">
+				<div class="top1">
+					<i class="lik"></i>
+				</div>
+				<div class="top2">
+					<h6>Website </h6>
+					<p><a href="#"> www.yourblog.com</a></p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+<!-- footer -->
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,354 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Experimental</title>
+		<link href="{% static "css/experimental_style.css" %}"     rel="stylesheet" type="text/css" media="all" />
+		<link href="{% static "css/experimental_bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
+		<!-- js -->
+		<script type="text/javascript" src="{% static "js/circles.js"%}"></script>
+		<script type="text/javascript" src="{% static "js/ex_jquery.min.js" %}"></script>
+		<script src="{% static "js/ex_move-top.js"%}"></script>
+		<script src="{% static "js/ex_easing.js"%}"></script>
+		<script src="{% static "js/ex_modernizr.custom.min.js"%}"></script>
+		<script src="{% static "js/ex_jquery.magnific-popup.js"%}"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<!-- js -->
+		<!-- start-smoth-scrolling -->
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+	<!-- start-smoth-scrolling -->
+	</head>
+	<body>
+		<!-- header -->
+		<div class="header">
+			<div class="header-info">
+				
+				<h1><br>i love the world</h1>
+				<p>I'm glad that you come to see the world with me.</p>
+			</div>
+			<div class="d-arrow">
+				<a class="scroll" href="#request"></a>
+			</div>
+		</div>
+		<!-- //header -->
+		<!-- header-bottom -->
+		<div class="header-bottom">
+			<!-- container -->
+			<div class="container wrap">
+				<p>My name is Xu wuji, I'm a programmer and love to explore the world as well. 
+				</p> 
+
+				<p>"The whole world is whistling." <br><br>"You're a catalyst to your happiness."
+				</p>
+				<h3>what i see</h3>
+				<div class="col-md-4 template">
+					<h4>LANDSCAPE.</h4>
+					<p>Impressed me. Shocked me. Touched me.</p>
+				</div>
+				<div class="col-md-4 template">
+					<h4>PEOPLE.</h4>
+					<p>We met and we get to know.</p>
+				</div>
+				<div class="col-md-4 template">
+					<h4>DREAMS.</h4>
+					<p>Everyone is able to destroy the dream, but not everyone is able to create it. So try to make it happen.</p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<!-- //container -->
+		</div>
+		<!-- //header-bottom -->
+		<!-- work -->
+		<div class="work">
+			<!-- container -->
+			<div class="container">
+				<h3>my footprint</h3>	
+				<ul id="filters" class="clearfix wow bounceIn" data-wow-delay="0.4s">
+					<li><span class="filter active" data-filter="app card icon logo web">All</span></li>
+					<li><span class="filter" data-filter="app">China</span></li>
+					<li><span class="filter" data-filter="card">Italy</span></li>
+					<li><span class="filter" data-filter="icon">Spain</span></li>
+					<li><span class="filter" data-filter="logo">Denmark</span></li>
+				</ul>
+				<div id="portfoliolist">
+					<div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a href="#" class="b-link-stripe b-animate-go">
+
+						     <img src="{% static "images/sanya.png" %}" />
+							 <div class="b-wrapper">
+							 <p class="b-animate b-from-left    b-delay03 ">Beautiful beach, blue sky and ocean.</p>
+						  	</div></a>
+							<div class="work-text"><h4>Sanya, China</h4></div>
+		                </div>
+					</div>				
+					<div class="portfolio card mix_all" data-cat="logo" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a href="#" class="b-link-stripe b-animate-go">
+								 <img src="{% static "images/roma.png" %}" />
+						    <div class="b-wrapper">
+							 <p class="b-animate b-from-left    b-delay03 ">Amazing Colosseo.</p>
+						  	</div></a>
+							<div class="work-text"><h4>Roma, Italy</h4></div>
+		                </div>
+					</div>		
+					<div class="portfolio logo mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a href="#" class="b-link-stripe b-animate-go">
+								<img src="{% static "images/mermaid.png" %}" />
+						     <div class="b-wrapper">
+							 <p class="b-animate b-from-left b-delay03" id="para">Mermaid in Langelinie.</p>
+						  	</div></a>
+							<div class="work-text"><h4>Copenhagen, Denmark</h4></div>
+		                </div>
+					</div>				
+					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a href="#" class="b-link-stripe b-animate-go">
+								<img src="{% static "images/milan.png" %}" />
+						     <div class="b-wrapper">
+							 <p class="b-animate b-from-left    b-delay03 ">City in Fashion.</p>
+						  	</div></a>
+							<div class="work-text"><h4>Milan, Italy</h4></div>
+		                </div>
+					</div>	
+					<div class="portfolio logo mix_all" data-cat="icon" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a href="#" class="b-link-stripe b-animate-go">
+						     <img src="{% static "images/esbjerg.png" %}" /><div class="b-wrapper">
+							 <p class="b-animate b-from-left    b-delay03 ">Sweet Home.</p>
+						  	</div></a>
+							<div class="work-text"><h4>Esbjerg, Denmark</h4></div>
+		                </div>
+					</div>			
+					<div class="portfolio icon mix_all" data-cat="icon" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a href="#" class="b-link-stripe b-animate-go">
+								<img src="{% static "images/bacelona.png" %}" />
+						     <div class="b-wrapper">
+							 <p class="b-animate b-from-left    b-delay03 ">Most beautiful beach in Europe.</p>
+						  	</div></a>
+							<div class="work-text"><h4>Barcelona, Spain</h4>></div>
+		                </div>
+					</div>
+					<div class="clearfix"> </div>	
+				</div>
+				  <div class="clearfix"> </div>
+				<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){		
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+			});
+		});
+	</script>
+	
+			
+				<script type="text/javascript" src="{% static "js/ex_jquery.mixitup.min.js"%}"></script>
+					<script type="text/javascript">
+					$(function () {
+						
+						var filterList = {
+						
+							init: function () {
+							
+								// MixItUp plugin
+								// http://mixitup.io
+								$('#portfoliolist').mixitup({
+									targetSelector: '.portfolio',
+									filterSelector: '.filter',
+									effects: ['fade'],
+									easing: 'snap',
+									// call the hover effect
+									onMixEnd: filterList.hoverEffect()
+								});				
+							
+							},
+							
+							hoverEffect: function () {
+							
+								// Simple parallax effect
+								$('#portfoliolist .portfolio').hover(
+									function () {
+										$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
+										$(this).find('img').stop().animate({top: -30}, 500, 'easeOutQuad');				
+									},
+									function () {
+										$(this).find('.label').stop().animate({bottom: -40}, 200, 'easeInQuad');
+										$(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');								
+									}		
+								);				
+							
+							}
+				
+						};
+						
+						// Run the show!
+						filterList.init();
+						
+						
+					});	
+					</script>
+					
+					<!-- pop-up-box -->
+					<script type="text/javascript" src="{% static "js/ex_modernizr.custom.min.js"%}"></script>
+					<link href="./css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+					<script type="text/javascript" src="{% static "js/ex_jquery.magnific-popup.js"%}"></script>
+					<!-- //pop-up-box -->
+			
+			</div>
+			<script>
+						$(document).ready(function() {
+						$('.popup-with-zoom-anim').magnificPopup({
+							type: 'inline',
+							fixedContentPos: false,
+							fixedBgPos: true,
+							overflowY: 'auto',
+							closeBtnInside: true,
+							preloader: false,
+							midClick: true,
+							removalDelay: 300,
+							mainClass: 'my-mfp-zoom-in'
+						});
+																						
+						});
+				</script>	
+	<!-- Work Ends Here -->
+
+				<div class="clearfix"></div>
+				<div class="button">
+					<a href="#">More</a>
+				</div>
+			</div>
+			<!-- //container -->
+		</div>
+		<!-- //work -->
+		<!-- photography -->
+		
+		<!--<div class="photography">-->
+			<!-- container -->
+			<!--
+			<div class="container">
+				<h3>photography</h3>
+				<p>In my life there is a place for photos. I love to share experiences and beautiful moments of your life with others. You can see the first examples of the new work, or photos from my vacation or a walk in the park. I thought you would be interested.</p>
+				<div class="photography-images">	
+					<a href="#small-dialog" class="b-link-stripe b-animate-go  thickbox play-icon popup-with-zoom-anim">
+						<img src="./images/11.jpg" />
+						<div class="caption">
+							<span> </span>
+						</div>
+					</a>
+				</div>
+				<div class="photography-images">
+					<a href="#small-dialog" class="b-link-stripe b-animate-go  thickbox play-icon popup-with-zoom-anim">
+						<img src="./images/12.jpg" />
+						<div class="caption">
+							<span> </span>
+						</div>
+					</a>
+				</div>
+				<div class="photography-images">
+					<a href="#small-dialog" class="b-link-stripe b-animate-go  thickbox play-icon popup-with-zoom-anim">
+						<img src="./images/13.jpg" />
+						<div class="caption">
+							<span> </span>
+						</div>
+					</a>
+				</div>
+				<div class="photography-images">
+					<a href="#small-dialog" class="b-link-stripe b-animate-go  thickbox play-icon popup-with-zoom-anim">
+						<img src="./images/19.jpg" />
+						<div class="caption">
+							<span> </span>
+						</div>
+					</a>
+				</div>
+				<div class="photography-images">
+					<a href="#small-dialog" class="b-link-stripe b-animate-go  thickbox play-icon popup-with-zoom-anim">
+						<img src="./images/17.jpg" />
+						<div class="caption">
+							<span> </span>
+						</div>
+					</a>
+				</div>
+				<div class="photography-images">
+					<a href="#small-dialog" class="b-link-stripe b-animate-go  thickbox play-icon popup-with-zoom-anim">
+						<img src="./images/18.jpg" />
+						<div class="caption">
+							<span> </span>
+						</div>
+					</a>
+				</div>
+				<div class="clearfix"> </div>
+				<div class="button">
+					<a href="#">See My Photoblog</a>
+				</div>
+			</div>
+			-->
+			<!-- //container -->
+		<!--</div>-->
+		<!-- //photography -->
+		<!-- request -->
+		<div id="request" class="request">
+			<div class="request-bg">
+				<div class="request-info">
+					<img src="{% static "images/infinite.png" %}" />
+					<p>Take a walk, You will see how big this world is.</p>
+					<!--
+					<form>
+						<input type="text" placeholder="Enter your email..." required="">
+						<input type="submit" value="Subscribe">
+					</form>
+					-->
+				</div>
+			</div>
+		</div>
+		<!-- //request -->
+		<!-- footer -->
+		<div class="footer">
+			<!-- container -->
+			<div class="container">
+				<div class="icons">
+					<!--
+					<ul>
+						<li><a href="#" class="twitter"> </a></li>
+						<li><a href="#" class="dribble"> </a></li>
+						<li><a href="#" class="behance"> </a></li>
+						<li><a href="#" class="instagram"> </a></li>
+					</ul>
+					-->
+					<p>Copyright &Xu,wuji. All Rights Reserved.</p>
+					
+				</div>
+			</div>
+			<!-- //container -->
+		</div>
+		<!-- //footer -->
+		<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear' 
+								 		};
+										*/
+										
+										$().UItoTop({ easingType: 'easeOutQuart' });
+										
+									});
+								</script>
+									<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	<!-- content-Get-in-touch -->
+	</body>
+</html>
