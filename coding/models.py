@@ -9,7 +9,7 @@ class Post(models.Model):
     introduction=models.TextField()
     content = models.TextField()
     tag= models.CharField(max_length=200)
-    image=models.ImageField(upload_to='upload')
+    #image=models.ImageField(upload_to='upload')
     published_date = models.DateTimeField(
             blank=True, null=True)
 

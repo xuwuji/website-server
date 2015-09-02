@@ -47,10 +47,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="head-nav">
 					<span class="menu"> </span>
 						<ul class="cl-effect-15">
-						<li><a href="index.html" data-hover="HOME">HOME</a></li>
-							<li><a href="about.html" data-hover="Coding">Coding</a></li>
+						<li><a href="{% url "index" %}" data-hover="HOME">HOME</a></li>
+							<li><a href="{% url "coding"%} " data-hover="Coding">Coding</a></li>
 							<li><a href="photos.html" data-hover="School">School</a></li>
-							<li><a href="404.html" data-hover="Experimental">Experimental</a></li>
+							<li><a href="{% url "experimental" %}" data-hover="Experimental">Experimental</a></li>
 							<li><a href="contact.html" data-hover="Project">Project</a></li>
 								<div class="clearfix"> </div>
 						</ul>

@@ -3,21 +3,10 @@ from django.utils import timezone
 from .models import Post
 from django.template import Context, Template
 # Create your views here.
+
+#coding index page view
 def coding(request):
-    post_list=Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, 'coding/coding.html',{'list': post_list})
-
-def detail(request):
-    #post_list=Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, 'coding/details.html',{})
-
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'coding/details_test.html', {'post': post})
-
-
-def test(request):
-    # reverse time order
+      # reverse time order
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     new_post_list=[]
     sublist = []
@@ -33,6 +22,12 @@ def test(request):
             sublist.append(posts[index])
     for group in new_post_list:
         print(group)
-    c = Context({"loop_times": range(len(new_post_list))})
-    #context['loop_times'] = range(len(new_post_list))
-    return render(request, 'coding/coding_test.html',{'list': new_post_list},c)
+    #c = Context({"loop_times": range(len(new_post_list))})
+    return render(request, 'coding/coding.html',{'list': new_post_list})
+
+
+#post detail page view
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'coding/detail.html', {'post': post})
+

@@ -26,7 +26,7 @@ def experimental_detail_sanya(request):
             small_img=s1[4:]
             pair_list.append([s1,small_img])
             #print(pair_list)  
-    print(pair_list)
+    #print(pair_list)
     return render(request, 'experimental/experimental_details_sanya.html', {'pair_list':pair_list})
 
 
