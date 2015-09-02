@@ -79,18 +79,24 @@
 					<li><span class="filter" data-filter="icon">Spain</span></li>
 					<li><span class="filter" data-filter="logo">Denmark</span></li>
 				</ul>
+
+
 				<div id="portfoliolist">
+
+
 					<div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper">		
-							<a href="#" class="b-link-stripe b-animate-go">
+							<a href="{% url "experimental_detail_sanya" %}" class="b-link-stripe b-animate-go">
 
-						     <img src="{% static "images/sanya.png" %}" />
+						     <img src="{% static "images/sanya.png" %}" href="{% url "experimental_detail_sanya" %}"/>
 							 <div class="b-wrapper">
 							 <p class="b-animate b-from-left    b-delay03 ">Beautiful beach, blue sky and ocean.</p>
 						  	</div></a>
-							<div class="work-text"><h4>Sanya, China</h4></div>
+
+							<div class="work-text"><a href="{% url "experimental_detail_sanya" %}"><h4>Sanya, China</h4></a></div>
 		                </div>
-					</div>				
+					</div>			
+
 					<div class="portfolio card mix_all" data-cat="logo" style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper">		
 							<a href="#" class="b-link-stripe b-animate-go">
@@ -98,9 +104,10 @@
 						    <div class="b-wrapper">
 							 <p class="b-animate b-from-left    b-delay03 ">Amazing Colosseo.</p>
 						  	</div></a>
-							<div class="work-text"><h4>Roma, Italy</h4></div>
+							<div class="work-text"><a href="{% url "experimental_detail_roma" %}"><h4>Roma, Italy</h4></a></div>
 		                </div>
 					</div>		
+
 					<div class="portfolio logo mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper">		
 							<a href="#" class="b-link-stripe b-animate-go">
@@ -108,9 +115,10 @@
 						     <div class="b-wrapper">
 							 <p class="b-animate b-from-left b-delay03" id="para">Mermaid in Langelinie.</p>
 						  	</div></a>
-							<div class="work-text"><h4>Copenhagen, Denmark</h4></div>
+							<div class="work-text"><a href="{% url "experimental_detail_copenhagen" %}"><h4>Copenhagen, Denmark</h4></a></div>
 		                </div>
-					</div>				
+					</div>			
+
 					<div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper">		
 							<a href="#" class="b-link-stripe b-animate-go">
@@ -118,18 +126,20 @@
 						     <div class="b-wrapper">
 							 <p class="b-animate b-from-left    b-delay03 ">City in Fashion.</p>
 						  	</div></a>
-							<div class="work-text"><h4>Milan, Italy</h4></div>
+							<div class="work-text"><a href="{% url "experimental_detail_milan" %}"><h4>Milan, Italy</h4></a></div>
 		                </div>
 					</div>	
+
 					<div class="portfolio logo mix_all" data-cat="icon" style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper">		
 							<a href="#" class="b-link-stripe b-animate-go">
 						     <img src="{% static "images/esbjerg.png" %}" /><div class="b-wrapper">
 							 <p class="b-animate b-from-left    b-delay03 ">Sweet Home.</p>
 						  	</div></a>
-							<div class="work-text"><h4>Esbjerg, Denmark</h4></div>
+							<div class="work-text"><a href="{% url "experimental_detail_esbjerg" %}"><h4>Esbjerg, Denmark</h4></a></div>
 		                </div>
 					</div>			
+
 					<div class="portfolio icon mix_all" data-cat="icon" style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper">		
 							<a href="#" class="b-link-stripe b-animate-go">
@@ -137,9 +147,10 @@
 						     <div class="b-wrapper">
 							 <p class="b-animate b-from-left    b-delay03 ">Most beautiful beach in Europe.</p>
 						  	</div></a>
-							<div class="work-text"><h4>Barcelona, Spain</h4>></div>
+							<div class="work-text"><a href="{% url "experimental_detail_barcelona" %}"><h4>Barcelona, Spain</h4></a></div>
 		                </div>
 					</div>
+
 					<div class="clearfix"> </div>	
 				</div>
 				  <div class="clearfix"> </div>
