@@ -68,7 +68,11 @@
 			<div class="cl">&nbsp;</div>
 			<!-- user picture -->
 			<div class="user-picture">
-				<img src="{% static "images/sanya_logo.png" %}" alt="" />
+				<!--<img src="{% static "images/sanya_logo.png" %}" alt="" />-->
+				
+				<img src="{% static {{place.logo}} %}" alt="My image"/> 
+				
+				
 			</div>
 			<!-- end user picture -->
 			
@@ -81,8 +85,8 @@
 				
 				<!-- description -->
 				<div class="description">
-					<h5>{{place.date}}</h5>
-					<p>{{place.introduction}}</p>
+					<h5>{{place.date}}</h5> 
+					<p>{{place.introduction}}  {{place.logo}} </p>
 				</div>
 				<!-- end description -->
 				
