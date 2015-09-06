@@ -1,8 +1,9 @@
 {% load staticfiles %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 <head>
-	<title>Free CSS template by ChocoTemplates.com</title>
+	<title>{{place.title}}</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="shortcut icon" href="{% static "css/images/favicon.ico?cb=1"%}" />
 	<link rel="stylesheet" href="{% static "css/detail_style.css"%}" type="text/css" media="all" />
@@ -26,7 +27,6 @@
 
 
 
-
 </head>
 
 
@@ -40,11 +40,11 @@
 		<!-- navigation -->
 		<div id="navigation">
 			<ul id="sortable">
-			    <li><a href="#"><span>About Me</span></a></li>
-			    <li><a href="#"><span>Contact Me</span></a></li>
-			    <li><a href="#"><span>Random Button</span></a></li>
-			    <li><a href="#"><span>Random Button</span></a></li>
-			    <li><a href="#"><span>Random Button</span></a></li>
+			    <li><a href="#"><span>Home</span></a></li>
+			    <li><a href="#"><span>Coding</span></a></li>
+			    <li><a href="#"><span>School</span></a></li>
+			    <li><a href="#"><span>Experimental</span></a></li>
+			    <li><a href="#"><span>Project</span></a></li>
 			</ul>
 		</div>
 		<!-- end navigation -->
@@ -68,7 +68,7 @@
 			<div class="cl">&nbsp;</div>
 			<!-- user picture -->
 			<div class="user-picture">
-				<img src="css/images/user-picture.jpg" alt="" />
+				<img src="{% static "images/sanya_logo.png" %}" alt="" />
 			</div>
 			<!-- end user picture -->
 			
@@ -76,197 +76,50 @@
 			<div class="user-info">
 			
 				<!-- username -->
-				<p class="username">ALEXANDRA DRESSEW</p>
+				<p class="username">{{place.title}}</p>
 				<!-- end username -->
 				
 				<!-- description -->
 				<div class="description">
-					<h5>FILE DESCRIPTION</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed rhoncus arcu. Proin lobortis augue id odio imperdiet aliquet.</p>
+					<h5>{{place.date}}</h5>
+					<p>{{place.introduction}}</p>
 				</div>
 				<!-- end description -->
 				
 			</div>
 			<!-- end user info -->
 			
-			<div class="cl">&nbsp;</div>
+		
 			
-			<!-- social links -->
-			<div class="social-links">
-				<p>FIND ME ON</p>
-				<a href="#" class="linkedin">linkedin</a>
-				<a href="#" class="skype">skype</a>
-				<a href="#" class="facebook">facebook</a>
-				<a href="#" class="twitter">twitter</a>
-				<a href="#" class="picasa">picasa</a>
-				<a href="#" class="lastfm">lastfm</a>
-				
-				<div class="cl">&nbsp;</div>
-			</div>
-			<!-- end social-links -->
+
+
+	
 		</div>
+
+
+
+
 		<!-- end user box -->
-		
-		<!-- image box -->
-		<div class="image-box">
-		 <div class="holder">
-			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
-			<div class="photo-cover">
-				<a href="{% static "css/images/golden-gate-big.jpg" %}" class="big-image"><img src="{% static "css/images/golden-gate.jpg" %}" alt="" /></a>
-			</div>
-			<!-- end photo cover -->
-			
-			<!-- photo name -->
-			<p class="photo-name">GOLDEN GATE</p>
-			<!-- end photo name -->
-		</div>
-		</div>
-		<!-- end image-box -->
-		
-		<!-- image box -->
-		<div class="image-box">
-			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
-			<div class="photo-cover">
-				<a href="css/images/remember-love-big.jpg" class="big-image"><img src="css/images/remember-love.jpg" alt="" /></a>
-			</div>
-			<!-- end photo cover -->
-			
-			<!-- photo name -->
-			<p class="photo-name">REMEMBER LOVE</p>
-			<!-- end photo name -->
 
-		</div>
-		<!-- end image-box -->
-		
-		<!-- image box -->
+	<!-- image box -->
+        {% for group in pair_list %}	
 		<div class="image-box">
 			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
+		<!-- photo cover -->
 			<div class="photo-cover">
-				<a href="css/images/sunset-big.jpg" class="big-image"><img src="css/images/sunset.jpg" alt="" /></a>
+					{% with 'images/sanya/'|add:group.1 as smallimage_static %} 
+					{% with 'images/sanya/'|add:group.0 as bigimage_static %}  											
+				<a href="{% static bigimage_static %}" class="big-image"><img src="{% static smallimage_static %}" alt="" /></a>
+					{% endwith %}
+					{% endwith %}
 			</div>
 			<!-- end photo cover -->
-			
 			<!-- photo name -->
-			<p class="photo-name">THE SUNSET</p>
+			<p class="photo-name">REMEMBER LOVE</p>	
 			<!-- end photo name -->
-
-		</div>
-		<!-- end image-box -->
-		
-		<!-- image box -->
-		<div class="image-box">
-			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
-			<div class="photo-cover">
-				<a href="css/images/venice-big.jpg" class="big-image"><img src="css/images/venice.jpg" alt="" /></a>
-			</div>
-			<!-- end photo cover -->
-			
-			<!-- photo name -->
-			<p class="photo-name">Venice</p>
-			<!-- end photo name -->
-
-		</div>
-		<!-- end image-box -->
-		
-		<!-- image box -->
-		<div class="image-box">
-			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
-			<div class="photo-cover">
-				<a href="css/images/andrew-fashion-big.jpg" class="big-image"><img src="css/images/andrew-fashion.jpg" alt="" /></a>
-			</div>
-			<!-- end photo cover -->
-			
-			<!-- photo name -->
-			<p class="photo-name">Andrew Fashion</p>
-			<!-- end photo name -->
-
-		</div>
-		<!-- end image-box -->
-		
-		<!-- image box -->
-		<div class="image-box">
-			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
-			<div class="photo-cover">
-				<a href="css/images/golden-gate-big.jpg" class="big-image"><img src="css/images/golden-gate.jpg" alt="" /></a>
-			</div>
-			<!-- end photo cover -->
-			
-			<!-- photo name -->
-			<p class="photo-name">GOLDEN GATE</p>
-			<!-- end photo name -->
-
-		</div>
-		<!-- end image-box -->
-		
-		<!-- image box -->
-		<div class="image-box">
-			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
-			<div class="photo-cover">
-			<a href="css/images/remember-love-big.jpg" class="big-image"><img src="css/images/remember-love.jpg" alt="" /></a>
-			</div>
-			<!-- end photo cover -->
-			
-			<!-- photo name -->
-			<p class="photo-name">REMEMBER LOVE</p>
-			<!-- end photo name -->
-
-		</div>
-		<!-- end image-box -->
-		
-		<!-- image box -->
-		<div class="image-box">
-			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
-			<div class="photo-cover">
-				<a href="css/images/venice-big.jpg" class="big-image"><img src="css/images/venice.jpg" alt="" /></a>
-			</div>
-			<!-- end photo cover -->
-			
-			<!-- photo name -->
-			<p class="photo-name">Venice</p>
-			<!-- end photo name -->
-
-		</div>
-		<!-- end image-box -->
-		
-		<!-- image box -->
-		<div class="image-box">
-			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
-			<div class="photo-cover">
-				<a href="css/images/andrew-fashion-big.jpg" class="big-image"><img src="css/images/andrew-fashion.jpg" alt="" /></a>
-			</div>
-			<!-- end photo cover -->
-			
-			<!-- photo name -->
-			<p class="photo-name">Andrew Fashion</p>
-			<!-- end photo name -->
-
-		</div>
-		<!-- end image-box -->
-		
-		<!-- image box -->
-		<div class="image-box">
-			<span class="drag-pointer">&nbsp;</span>
-			<!-- photo cover -->
-			<div class="photo-cover">
-				<a href="{% static "css/images/sunset-big.jpg"%}" class="big-image"><img src="{% static "css/images/sunset.jpg"%}" alt="" /></a>
-			</div>
-			<!-- end photo cover -->
-			
-			<!-- photo name -->
-			<p class="photo-name">THE SUNSET</p>
-			<!-- end photo name -->
-
-		</div>
-		<!-- end image-box -->
+		</div>	
+        {% endfor %}
+	<!-- end image-box -->	
 		
 		<div class="cl">&nbsp;</div>
 	</div>

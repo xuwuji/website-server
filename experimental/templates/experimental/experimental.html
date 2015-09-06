@@ -86,25 +86,25 @@
 
 					<div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper">		
-							<a href="{% url "experimental_detail_sanya" %}" class="b-link-stripe b-animate-go">
+							<a href="{% url "experimental_detail_sanya" place_name="sanya"%}" class="b-link-stripe b-animate-go">
 
-						     <img src="{% static "images/sanya.png" %}" href="{% url "experimental_detail_sanya" %}"/>
+						     <img src="{% static "images/sanya.png" %}" href="{% url "experimental_detail_sanya" place_name="sanya"%}"/>
 							 <div class="b-wrapper">
 							 <p class="b-animate b-from-left    b-delay03 ">Beautiful beach, blue sky and ocean.</p>
 						  	</div></a>
 
-							<div class="work-text"><a href="{% url "experimental_detail_sanya" %}"><h4>Sanya, China</h4></a></div>
+							<div class="work-text"><a href="{% url "experimental_detail_sanya" place_name="sanya" %}"><h4>Sanya, China</h4></a></div>
 		                </div>
 					</div>			
 
 					<div class="portfolio card mix_all" data-cat="logo" style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper">		
-							<a href="#" class="b-link-stripe b-animate-go">
-								 <img src="{% static "images/roma.png" %}" />
+							<a href="{% url "experimental_detail_roma" place_name="roma"%}" class="b-link-stripe b-animate-go">
+								 <img src="{% static "images/roma.png" %}"  href="{% url "experimental_detail_roma" place_name="roma"%}" />
 						    <div class="b-wrapper">
 							 <p class="b-animate b-from-left    b-delay03 ">Amazing Colosseo.</p>
 						  	</div></a>
-							<div class="work-text"><a href="{% url "experimental_detail_roma" %}"><h4>Roma, Italy</h4></a></div>
+							<div class="work-text"><a href="{% url "experimental_detail_roma" place_name="roma"%}"><h4>Roma, Italy</h4></a></div>
 		                </div>
 					</div>		
 

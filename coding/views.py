@@ -20,8 +20,8 @@ def coding(request):
             new_post_list.append(sublist)
             sublist = []
             sublist.append(posts[index])
-    for group in new_post_list:
-        print(group)
+    #for group in new_post_list:
+    #    print(group)
     #c = Context({"loop_times": range(len(new_post_list))})
     return render(request, 'coding/coding.html',{'list': new_post_list})
 
