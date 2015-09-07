@@ -69,10 +69,15 @@
 			<!-- user picture -->
 			<div class="user-picture">
 				<!--<img src="{% static "images/sanya_logo.png" %}" alt="" />-->
+
+				{%if {{place.logo}} %}
+
+
+				<img src="{{place.logo.url}} " alt="My image"/> 
 				
-				<img src="{% static {{place.logo}} %}" alt="My image"/> 
-				
-				
+				{% else %}
+				<img src="" alt="logo image"/>
+				{% endif %}
 			</div>
 			<!-- end user picture -->
 			
@@ -86,7 +91,7 @@
 				<!-- description -->
 				<div class="description">
 					<h5>{{place.date}}</h5> 
-					<p>{{place.introduction}}  {{place.logo}} </p>
+					<p>{{place.introduction}} </p>
 				</div>
 				<!-- end description -->
 				
