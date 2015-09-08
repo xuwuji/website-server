@@ -9,7 +9,8 @@ class Post(models.Model):
     introduction=models.TextField()
     content = models.TextField()
     tag= models.CharField(max_length=200)
-    image=models.ImageField(upload_to='coding_post_img_logo', blank=True)
+    logo=models.ImageField(upload_to='coding_post_logo', blank=True,default='0')
+    post_image=models.ImageField(upload_to='coding_post_img', blank=True,default='0')
     published_date = models.DateTimeField(
             blank=True, null=True)
 
@@ -19,4 +20,19 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    
+class Comment(models.Model):
+    post= models.ForeignKey(Post, related_name='post_comment')
+    name=models.CharField(max_length=200)
+    email=models.CharField(max_length=200)
+    content=models.TextField()
+    
+    
+    def post(self):
+        self.save()
+
+    def __str__(self):
+        return post.title
+    
     

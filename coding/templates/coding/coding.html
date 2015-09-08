@@ -122,7 +122,7 @@
 									<div class="integer">
 										<h3>{{ post.title }}</h3>
 										<p class="adm">{{ post.published_date }}</p>
-										<a href="details.html"><img src="{{post.image.url}}" class="img-responsive" alt=""></a>
+										<a href="{% url "post_detail" pk=post.pk %}"><img src="{{post.logo.url}}" class="img-responsive" alt=""></a>
 										<p>{{ post.introduction }}</p>
 										<<a href="{% url "post_detail" pk=post.pk %}">Read More</a>
 									</div>

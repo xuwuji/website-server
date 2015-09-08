@@ -80,15 +80,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<p><h2>{{ post.title }}</h2></p>
 			</div>
 			<div class="det_pic">
-				  <img src="images/img18.jpg" class="img-responsive" alt="">
+				  <img src="{{post.post_image.url}}" class="img-responsive" alt="">
 			</div>
 
 			<div class="det_text">
-				{{post.content}}
+				{{post.content|linebreaksbr}}
 			</div>
+
+
+
+
 			<ul class="links">
 				  		 <li><i class="date"> </i><span class="icon_text">{{post.published_date}}</span></li>
-				  		 <li><a href="#"><i class="admin"> </i><span class="icon_text">Admin</span></a></li>
+				  		 <li><a href="#"><i class="admin"> </i><span class="icon_text">Wuji,Xu</span></a></li>
 				  		 <li class="last"><a href="#"><i class="permalink"> </i><span class="icon_text">Permalink</span></a></li>
 				    </ul>
 					<ul class="links_middle">
@@ -100,6 +104,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			  			<li><i class="views"> </i><span class="icon_text">49</span></li>
 			  			<li><i class="likes"> </i><span class="icon_text">12</span></li>
 		  		    </ul>
+
+
+
+
+
+
+
+
 			 <div class="comments1">
 								<h4>COMMENTS</h4>
 			  				<div class="comments-main">
@@ -123,27 +135,82 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 			  				</div>
 			<div class="lev">
+
+
+
+
+
+
+
+
+
 			<div class="leave">
 				<h4>Leave a comment</h4>
 				</div>
-				<form id="commentform">
-				    <label for="author">Name</label>
+				<form id="commentform" method="post" action="/coding/add_comment/">
+
+						    {% for field in form.visible_fields %}
+                			{{ field.errors }}
+                			{{ field }}
+            				{% endfor %}
+
+				    	<label for="author">Name</label>
+
+
+
 						<input id="author" name="author" type="text" value="" size="30" aria-required="true">
+
+
 						<label for="email">Email</label>
+
+
 						<input id="email" name="email" type="text" value="" size="30" aria-required="true">
-						<label for="url">Website</label>
-						<input id="url" name="url" type="text" value="" size="30">
+
+
 						<label for="comment">Comment</label>
+
+
 						<textarea></textarea>
 					 <div class="clearfix"></div>
-			           <input name="submit" type="submit" id="submit" value="Send">
+
+
+			           <input type="submit" name="submit" value="Create Comment" >
+
+
 					<div class="clearfix"></div>
-				   </form>
-				  </div>
-				  
-		</div>
+				</form>
+				</div>				  
+			</div>
+
+
+
+
+
+
+
+
+
+
+
 	</div>
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- footer -->
 	<div class="footer">
 		<div class="container">
