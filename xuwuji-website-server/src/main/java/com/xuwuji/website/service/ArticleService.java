@@ -30,20 +30,30 @@ public class ArticleService {
 	private int current_page_number;
 
 	@Transactional
-	public void add(Article article) {
-
-		if (article.getId() == null) {
+	public void save(Article article) {
+		System.out.println("id" + article.getId());
+		if (article.getId() == 0) {
 			String time = Util.getDateTime(DateTime.now());
+			System.out.println("time" + time);
 			article.setTime(time);
+			article.setFlag(1);
 		}
 		// 这里其实是可以覆盖的，如果在数据库中已经有了这么一个article记录（以id即pk来判断），则直接在此条记录上面覆盖
 
 		articleRepository.saveAndFlush(article);
 	}
+	
+	@Transactional
+	public void update(Article article) {
+		System.out.println("UODATE ID:" + article.getId());
+		// 这里其实是可以覆盖的，如果在数据库中已经有了这么一个article记录（以id即pk来判断），则直接在此条记录上面覆盖
+		articleRepository.saveAndFlush(article);
+	}
+	
 
 	@Transactional
-	public void updateArticleContent(Integer id, String content) {
-		articleRepository.updateArticleContent(id, content);
+	public void deleteArticle(int id) {
+		articleRepository.deleteArticle(id);
 	}
 
 	public int getTotalArticlesNum() {
@@ -66,8 +76,8 @@ public class ArticleService {
 	}
 
 	public int getCurrentPageNum(int pageNum) {
-		//the page number begins from 0 in the database
-		PageRequest pageable = new PageRequest(pageNum-1, PageSize, sort);
+		// the page number begins from 0 in the database
+		PageRequest pageable = new PageRequest(pageNum - 1, PageSize, sort);
 		Page<Article> result = articleRepository.findAll(pageable);
 		current_page_number = (int) (result.getNumber() + 1);
 		return current_page_number;

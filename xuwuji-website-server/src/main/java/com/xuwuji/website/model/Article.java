@@ -21,6 +21,8 @@ public class Article {
 	private String category;
 	// each tag is appended by a white space
 	private String tags;
+	// 0-> deleted 1->ok
+	private int flag;
 
 	@GeneratedValue
 	@Id
@@ -83,6 +85,14 @@ public class Article {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override

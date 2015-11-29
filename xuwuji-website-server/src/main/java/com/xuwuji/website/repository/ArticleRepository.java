@@ -37,7 +37,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer>, JpaS
 	@Query("SELECT max(a.id) FROM Article a")
 	int getMaxId();
 
-	@Query("SELECT count(id) FROM Article a GROUP BY a.category")
+	@Query(value="SELECT * FROM Article a GROUP BY a.category", nativeQuery=true)
 	int getCategoryNum();
 
 	// 可以通过自定义的 JPQL 完成 UPDATE 和 DELETE 操作. 注意: JPQL 不支持使用 INSERT
@@ -46,7 +46,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer>, JpaS
 	// UPDATE 或 DELETE 操作需要使用事务, 此时需要定义 Service 层. 在 Service 层的方法上添加事务操作.
 	// 默认情况下, SpringData 的每个方法上有事务, 但都是一个只读事务. 他们不能完成修改操作!
 	@Modifying
-	@Query("UPDATE Article p SET p.content = :content WHERE id = :id")
-	void updateArticleContent(@Param("id") Integer id, @Param("content") String content);
+	@Query("UPDATE Article a SET a.flag = 0 WHERE id = :id")
+	void deleteArticle(@Param("id") Integer id);
 
 }

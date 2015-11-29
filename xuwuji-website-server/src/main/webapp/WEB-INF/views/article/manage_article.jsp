@@ -7,7 +7,10 @@
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/dashboard.css" rel="stylesheet" type="text/css" />
 <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/RequestUrl.js"></script>
+<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+
 <title>Article</title>
 </head>
 <body>
@@ -41,7 +44,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="#">Article <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Reports</a></li>
             <li><a href="#">Analytics</a></li>
             <li><a href="#">Export</a></li>
@@ -91,6 +94,7 @@
                   <th>Category</th>
                   <th>Time</th>
                   <th>Tags</th>
+                  <th>flag</th>
                   <th></th>
                 </tr>
               </thead>
@@ -105,6 +109,56 @@
         </div>
       </div>
     </div>
+
+
+<!--detail modal starts here-->
+    <div class="modal fade" id="detail_Modal" role="dialog">
+        <div class="modal-dialog" style="margin-left:10%; width:80%;" >
+            <!-- Modal content-->
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title" id="article_detail_id" style="TEXT-ALIGN: center"></h5>                    
+                </div>
+               <div class="modal-header">
+                   <h5 class="modal-title" id="article_detail_title" style="TEXT-ALIGN: center"></h5>               
+                </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="article_detail_category" style="TEXT-ALIGN: center"></h5>
+                </div>
+                <div class="modal-header">
+                    
+                    <h5 class="modal-title" id="article_detail_tags" style="TEXT-ALIGN: center"></h5>
+                </div>
+                <div class="container">
+                    <div class="modal-body">
+                        <div id="article_detail_body" style=" width:85%;">
+                          <textarea name="editor1" id="editor1" rows="10" cols="80"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="update()">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--detail modal ends here-->
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 
 <script type="text/javascript">
@@ -174,7 +228,7 @@ StringBuffer.prototype.toString = function() {
 var line = new StringBuffer();
 $.getJSON('http://localhost:8080/xuwuji-website-server/api/article/getArticles/1', function(data) {
   $.each(data, function(index, article) {
-        line.append('<tr><td>'+article.id+'</td><td>'+article.title+'</td><td>'+article.category+'</td><td>'+article.time+'</td><td>'+article.tags+'</td><td><button type=\'button\' class=\'btn btn-info btn-lg\' style=\'padding-top: 0px; padding-bottom: 0px\' >delete</button><button type=\'button\' class=\'btn btn-info btn-lg\' style=\'padding-top: 0px; padding-bottom: 0px\' >update</button></td><tr>');
+        line.append('<tr><td>'+article.id+'</td><td>'+article.title+'</td><td>'+article.category+'</td><td>'+article.time+'</td><td>'+article.tags+'</td><td>'+article.flag+'</td><td><button type=\'button\' class=\'btn btn-info btn-lg\' style=\'padding-top: 0px; padding-bottom: 0px\' onclick=\'Delete('+article.id+')\'>delete</button><button type=\'button\' class=\'btn btn-info btn-lg\' style=\'padding-top: 0px; padding-bottom: 0px\' data-toggle=\'modal\' data-target=\'#detail_Modal\'   onclick=\'showDetailModal('+article.id+')\'>update</button></td><tr>');
       });
  //console.log(line.toString());
   var $table_content=$('#table_content');
@@ -215,7 +269,7 @@ var url='http://localhost:8080/xuwuji-website-server/api/article/getArticles/'+p
 //console.log(url);
 $.getJSON(url, function(data) {
   $.each(data, function(index, article) {
-        line.append('<tr><td>'+article.id+'</td><td>'+article.title+'</td><td>'+article.category+'</td><td>'+article.time+'</td><td>'+article.tags+'</td><td><button type=\'button\' class=\'btn btn-info btn-lg\' style=\'padding-top: 0px; padding-bottom: 0px\' >delete</button><button type=\'button\' class=\'btn btn-info btn-lg\' style=\'padding-top: 0px; padding-bottom: 0px\' >update</button></td><tr>');
+        line.append('<tr><td>'+article.id+'</td><td>'+article.title+'</td><td>'+article.category+'</td><td>'+article.time+'</td><td>'+article.tags+'</td><td>'+article.flag+'</td><td><button type=\'button\' class=\'btn btn-info btn-lg\' style=\'padding-top: 0px; padding-bottom: 0px\' onclick=\'Delete('+article.id+')\'>delete</button><button type=\'button\' class=\'btn btn-info btn-lg\' style=\'padding-top: 0px; padding-bottom: 0px\' data-toggle=\'modal\' data-target=\'#detail_Modal\' onclick=\'showDetailModal('+article.id+')\'>update</button></td><tr>');
       });
   //console.log(line.toString());
   var $table_content=$('#table_content');
@@ -284,6 +338,104 @@ max_page=parseInt(max_page);
     }
 }
 /* show the last article page function starts here ...*/
+
+
+/* delete an article function starts here ...*/
+//set the flag of the article to 0
+function Delete(ArticleId){
+$.ajax({
+  url: delete_article_url+ArticleId,
+  type: 'GET',
+})
+.done(function() {
+  console.log("success");
+  var $current_page=$('#current_page');
+  var current_page_number=$current_page.text();
+  current_page_number=parseInt(current_page_number.slice(0,current_page_number.indexOf('/')));
+  getPage(parseInt(current_page_number));
+  setInfo(parseInt(current_page_number));  
+})
+.fail(function() {
+  console.log("error");
+})
+.always(function() {
+  console.log("complete");
+});
+}
+/* delete an article function starts here ...*/
+
+
+
+/* show the datail of an article function starts here ...*/
+function showDetailModal(ArticleId){
+
+    var $article_detail_body = $('#article_detail_body');
+
+    console.log(detail_article_url + ArticleId);
+    $
+        .ajax({
+            url: detail_article_url + ArticleId,
+            type: 'GET',
+            success: function(data) {
+                var $article_detail_title = $('#article_detail_title');
+                var $article_detail_tags = $('#article_detail_tags');
+                var $article_detail_category = $('#article_detail_category');
+                var $article_detail_body=$('#article_detail_body');
+                $article_detail_category.text(data.category);
+                $article_detail_title.text(data.title);
+                $article_detail_tags.text(data.tags);
+                $('#article_detail_id').text(data.id);
+                //$article_detail_body.html(data.content);
+                CKEDITOR.replace('editor1');
+                $('#editor1').text(data.content);
+            }
+        });
+}
+/* show the datail of an article function ends here ...*/
+
+function update(ArticleId){
+  var $article_detail_title = $('#article_detail_title');
+  var $article_detail_tags = $('#article_detail_tags');
+  var $article_detail_category = $('#article_detail_category');
+  var $article_detail_content=$('#editor1');
+  var $article_detail_id=$('#article_detail_id');
+  var title=$article_detail_title.text();
+  var tags=$article_detail_tags.text();
+  var category=$article_detail_category.text();
+  var data = CKEDITOR.instances.editor1.getData();
+  var content=data;
+  var id=$article_detail_id.text();
+  console.log(title);
+  console.log(tags);
+  console.log(category);
+  console.log(content);
+  console.log(id);
+  $.ajax({
+    url: update_article_url,
+    type: 'POST',
+    dataType: 'json',
+    contentType : "application/json; charset=utf-8",
+    data:JSON.stringify({"id": id,"title": title,"category": category,"tags":tags,"content": content}) ,
+  })
+  .done(function() {
+    console.log("success");
+  })
+  .fail(function() {
+    console.log("error");
+  })
+  .always(function() {
+    console.log("complete");
+  });
+  
+
+
+
+
+}
+
+
+
+
 </script>
 
 </html>
