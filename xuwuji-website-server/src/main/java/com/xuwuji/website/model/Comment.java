@@ -3,6 +3,8 @@ package com.xuwuji.website.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "COMMENT")
@@ -49,6 +51,8 @@ public class Comment {
 		this.user = user;
 	}
 
+	@ManyToOne
+	@JoinColumn(name = "articleId",referencedColumnName="article_id")
 	public int getArticle_id() {
 		return article_id;
 	}

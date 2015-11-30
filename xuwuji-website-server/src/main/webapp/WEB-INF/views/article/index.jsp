@@ -17,6 +17,10 @@
 	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/RequestUrl.js"></script>
+	<script
+	src="${pageContext.request.contextPath}/resources/js/jquery.infinitescroll.js"></script>
+	<script
+	src="${pageContext.request.contextPath}/resources/js/jquery.masonry.min.js"></script>
 <link
 	href="${pageContext.request.contextPath}/resources/css/article_index.css"
 	rel="stylesheet" type="text/css" />
@@ -43,15 +47,21 @@
 
 		<div class="row">
 			<div class="col-sm-8 blog-main">
-				<div class="col-sm-8 blog-main" id="content_div"></div>
+				<div id="content_div"></div>
 				<div class="col-sm-8 blog-main">
-					<button type="button" class="btn btn-secondary" id="previous_page"
-						onclick='previousPage()'>previous</button>
-					<span id='current_page'></span>
-					<button type="button" class="btn btn-secondary" id="next_page"
-						onclick='nextPage()'>next</button>
+					  <nav>
+            <ul class="pager">
+              <li><a id="previous_page" onclick='previousPage()'>Previous</a></li>
+              <span id='current_page'></span>
+              <li><a id="next_page" onclick='nextPage()'>Next</a></li>
+            </ul>
+          </nav>
+					
 				</div>
 			</div>
+
+
+
 
 			<!-- /.blog-main -->
 
@@ -132,7 +142,7 @@
 															+ article.category
 															+ '</a></p><p>'
 															+ article.content
-															+ '</p></div><!-- one article ends here... -->');
+															+ '</p></div><hr><!-- one article ends here... -->');
 
 										});
 						// console.log(content.toString());
@@ -197,7 +207,7 @@
 																+ article.category
 																+ '</a></p><p>'
 																+ article.content
-																+ '</p></div><!-- one article ends here... -->');
+																+ '</p></div><hr><!-- one article ends here... -->');
 											});
 							//console.log(line.toString());
 							var $content_div = $('#content_div');
@@ -240,6 +250,8 @@
 	}
 	/* show a next article page function ends here ...*/
 
+/* show article pages of a category function starts here ...*/
+
 	function getArticlesByCategory(category) {
 		$
 				.getJSON(
@@ -266,6 +278,8 @@
 							$content_div.html(line.toString());
 						});
 	}
+
+	/* show article pages of a category function ends here ...*/
 </script>
 
 </html>

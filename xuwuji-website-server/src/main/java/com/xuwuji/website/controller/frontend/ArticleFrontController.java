@@ -41,8 +41,8 @@ public class ArticleFrontController {
 	@Autowired
 	private ArticleRepository articleRepository;
 
-	// get the articles from the db,the flag need to be 1
-	@RequestMapping(value = "/getArticles/{pageNum}", method = RequestMethod.GET)
+	// get the articles of a given page from the db,the flag need to be 1
+	@RequestMapping(value = "/getArticles/page/{pageNum}", method = RequestMethod.GET)
 	public @ResponseBody List<Article> getArticlesByPage(@PathVariable("pageNum") int pageNum) {
 		// order:latest articles show first
 		Order Order = new Order(Direction.DESC, "id");
@@ -71,6 +71,16 @@ public class ArticleFrontController {
 		return result.getContent();
 	}
 
+	// get an article by its id from the db,the flag need to be 1
+	@RequestMapping(value = "/getArticles/{ArticleNum}", method = RequestMethod.GET)
+	public ModelAndView getArticlesById(@PathVariable("ArticleNum") int ArticleNum) {
+		Article result = articleRepository.getById(ArticleNum);
+		ModelAndView model = new ModelAndView();
+		model.setViewName("/article/article_detail");
+		model.addObject("article", result);
+		return model;
+	}
+
 	// get the info of the articles
 	@RequestMapping(value = "/getInfo/{pageNum}", method = RequestMethod.GET)
 	public @ResponseBody HashMap<String, Integer> getInfo(@PathVariable("pageNum") int pageNum) {
@@ -90,58 +100,26 @@ public class ArticleFrontController {
 		return list;
 	}
 
-	// get articles of a given category
-	@RequestMapping(value = "/getArticles/category/{category}", method = RequestMethod.GET)
-	public @ResponseBody ArrayList<Article> getArticlesByCategories(@PathVariable("category") final String category) {
+	// get articles of a given category of a given page
+	@RequestMapping(value = "/getArticles/category/{category}/{pageNum}", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<Article> getArticlesByCategories(@PathVariable("category") final String category,
+			@PathVariable("pageNum") int pageNum) {
 		ArrayList<Article> list = articleRepository.getArticleByCategory(category);
 		// order:latest articles show first
 		Order Order = new Order(Direction.DESC, "id");
 		Sort sort = new Sort(Order);
-		Specification<Article> criteria1 = new Specification<Article>() {
-			/**
-			 * @param *root:
-			 *            代表查询的实体类.
-			 * @param query:
-			 *            可以从中可到 Root 对象, 即告知 JPA Criteria 查询要查询哪一个实体类. 还可以
-			 *            来添加查询条件, 还可以结合 EntityManager 对象得到最终查询的 TypedQuery 对象.
-			 * @param *cb:
-			 *            CriteriaBuilder 对象. 用于创建 Criteria 相关对象的工厂. 当然可以从中获取到
-			 *            Predicate 对象
-			 * @return: *Predicate 类型, 代表一个查询条件.
-			 */
+		// in db, the page number begins from 0, so it need minus 1
+		PageRequest pageable = new PageRequest(pageNum - 1, PageSize, sort);
+		Page<Article> result = articleRepository.findAll(new Specification<Article>() {
 			public Predicate toPredicate(Root<Article> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				Path path1 = root.get("flag");
-				Predicate predict1 = cb.equal(path1, 1);
-				return predict1;
-			}
-		};
-		Specification<Article> criteria2 = new Specification<Article>() {
-			/**
-			 * @param *root:
-			 *            代表查询的实体类.
-			 * @param query:
-			 *            可以从中可到 Root 对象, 即告知 JPA Criteria 查询要查询哪一个实体类. 还可以
-			 *            来添加查询条件, 还可以结合 EntityManager 对象得到最终查询的 TypedQuery 对象.
-			 * @param *cb:
-			 *            CriteriaBuilder 对象. 用于创建 Criteria 相关对象的工厂. 当然可以从中获取到
-			 *            Predicate 对象
-			 * @return: *Predicate 类型, 代表一个查询条件.
-			 */
-			public List<Predicate> toPredicate(Root<Article> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				final List<Predicate> predicates = new ArrayList<Predicate>();
 				Path path1 = root.get("flag");
 				Path path2 = root.get("category");
 				Predicate predict1 = cb.equal(path1, 1);
 				Predicate predict2 = cb.equal(path2, category);
-				predicates.add(predict1);
-				predicates.add(predict2);
-				return predicates;
+				query.where(predict1, predict2);
+				return null;
 			}
-		};
-		// in db, the page number begins from 0, so it need minus 1
-		PageRequest pageable = new PageRequest(pageNum - 1, PageSize, sort);
-		Page<Article> result = articleRepository.findAll(criteria, pageable);
-		return result.getContent();
+		}, pageable);
 		return list;
 	}
 
@@ -150,6 +128,14 @@ public class ArticleFrontController {
 	public ModelAndView getIndexPage() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("/article/index");
+		return model;
+	}
+
+	@RequestMapping(value = "/detail.html", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	public ModelAndView getDetailPage() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("/article/article_detail");
 		return model;
 	}
 

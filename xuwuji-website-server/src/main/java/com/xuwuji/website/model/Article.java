@@ -3,8 +3,10 @@ package com.xuwuji.website.model;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +26,7 @@ public class Article {
 	private String tags;
 	// 0-> deleted 1->ok
 	private int flag;
-	private List<Comment> list_comment;
+	private List<Comment> comments;
 
 	@GeneratedValue
 	@Id
@@ -95,6 +97,16 @@ public class Article {
 
 	public void setFlag(int flag) {
 		this.flag = flag;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "article_id")
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@Override
