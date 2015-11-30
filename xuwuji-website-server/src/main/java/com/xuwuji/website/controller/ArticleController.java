@@ -31,7 +31,7 @@ import com.xuwuji.website.model.Article;
 import com.xuwuji.website.repository.ArticleRepository;
 import com.xuwuji.website.service.ArticleService;
 
-@RequestMapping("/api/article")
+@RequestMapping("/article")
 @Controller
 public class ArticleController {
 	private final int PageSize = 10;

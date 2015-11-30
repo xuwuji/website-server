@@ -1,6 +1,7 @@
 package com.xuwuji.website.model;
 
 import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +24,7 @@ public class Article {
 	private String tags;
 	// 0-> deleted 1->ok
 	private int flag;
+	private List<Comment> list_comment;
 
 	@GeneratedValue
 	@Id
