@@ -85,6 +85,7 @@
           </div>
 
           <h2 class="sub-header">Articles</h2>
+          <button type="button" class="btn btn-primary" data-toggle='modal' data-target='#add_Modal' onclick='add()'>Add</button>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -121,15 +122,15 @@
                     <h5 class="modal-title" id="article_detail_id" style="TEXT-ALIGN: center"></h5>                    
                 </div>
                <div class="modal-header">
-                   <h5 class="modal-title" id="article_detail_title" style="TEXT-ALIGN: center"></h5>               
+                    Title:<input type="text" id="article_detail_title" rows="10" cols="100"></input><br>                 
                 </div>
                 <div class="modal-header">
-                    <h5 class="modal-title" id="article_detail_category" style="TEXT-ALIGN: center"></h5>
+                   Category:<input type="text" id="article_detail_category" rows="10" cols="80"> </input><br>        
+                  
                 </div>
                 <div class="modal-header">
-                    
-                    <h5 class="modal-title" id="article_detail_tags" style="TEXT-ALIGN: center"></h5>
-                </div>
+                    Tags:<input type="text" id="article_detail_tags" rows="10" cols="80"> </input><br>
+                   </div>
                 <div class="container">
                     <div class="modal-body">
                         <div id="article_detail_body" style=" width:85%;">
@@ -139,7 +140,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" onclick="update()">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="update()">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -148,6 +149,36 @@
 <!--detail modal ends here-->
 
 
+<!--Add a new Article modal starts here-->
+    <div class="modal fade" id="add_Modal" role="dialog">
+        <div class="modal-dialog" style="margin-left:10%; width:80%;" >
+            <!-- Modal content-->
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    Title:<input type="text" id="add_title" rows="10" cols="100"></input><br>                   
+                </div>
+               <div class="modal-header">
+                   Category:<input type="text" id="add_category" rows="10" cols="80"> </input><br>              
+                </div>
+                <div class="modal-header">
+                    Tags:<input type="text" id="add_tags" rows="10" cols="80"> </input><br>
+                </div>
+                <div class="container">
+                    <div class="modal-body">
+                        <div id="article_detail_body" style=" width:85%;">
+                          <textarea id="add_editor" rows="10" cols="80"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="addNew()">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--Add a new Article modal ends here-->
 
 
 
@@ -365,6 +396,8 @@ $.ajax({
 /* delete an article function starts here ...*/
 
 
+var update_count=0;
+
 
 /* show the datail of an article function starts here ...*/
 function showDetailModal(ArticleId){
@@ -381,12 +414,16 @@ function showDetailModal(ArticleId){
                 var $article_detail_tags = $('#article_detail_tags');
                 var $article_detail_category = $('#article_detail_category');
                 var $article_detail_body=$('#article_detail_body');
-                $article_detail_category.text(data.category);
-                $article_detail_title.text(data.title);
-                $article_detail_tags.text(data.tags);
+                $article_detail_category.val(data.category);
+                $article_detail_title.val(data.title);
+                $article_detail_tags.val(data.tags);
                 $('#article_detail_id').text(data.id);
                 //$article_detail_body.html(data.content);
-                CKEDITOR.replace('editor1');
+                if(update_count==0){
+                  CKEDITOR.replace('editor1');
+                  update_count=update_count+1;
+                }
+              
                 $('#editor1').text(data.content);
             }
         });
@@ -399,9 +436,9 @@ function update(ArticleId){
   var $article_detail_category = $('#article_detail_category');
   var $article_detail_content=$('#editor1');
   var $article_detail_id=$('#article_detail_id');
-  var title=$article_detail_title.text();
-  var tags=$article_detail_tags.text();
-  var category=$article_detail_category.text();
+  var title=$article_detail_title.val();
+  var tags=$article_detail_tags.val();
+  var category=$article_detail_category.val();
   var data = CKEDITOR.instances.editor1.getData();
   var content=data;
   var id=$article_detail_id.text();
@@ -427,14 +464,40 @@ function update(ArticleId){
     console.log("complete");
   });
   
-
-
-
-
 }
 
+var count=0;
 
+function add(){
+  if(count==0){
+  CKEDITOR.replace('add_editor');
+  count=count+1;
+  }
+}
 
+function addNew(){
+  var data = CKEDITOR.instances.add_editor.getData();
+    $.ajax({
+      url : save_url,
+      type : 'POST',
+      dataType : 'json',
+      contentType : "application/json; charset=utf-8",
+      data : JSON.stringify({
+        "title" : $('#add_title').val(),
+        "content" : data,
+        "category" : $('#add_category').val(),
+        "tags" : $('#add_tags').val(),
+      }),
+    }).done(function() {
+      console.log("success");
+    }).fail(function() {
+      console.log("error");
+    }).always(function() {
+      console.log("complete");
+    });
+    //console.log(data);
+
+}
 
 </script>
 

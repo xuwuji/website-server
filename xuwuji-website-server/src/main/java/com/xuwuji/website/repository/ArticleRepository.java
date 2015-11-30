@@ -37,7 +37,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer>, JpaS
 	@Query("SELECT max(a.id) FROM Article a")
 	int getMaxId();
 
-	@Query(value="SELECT * FROM Article a GROUP BY a.category", nativeQuery=true)
+	@Query(value = "select count(*) from (SELECT * from article group by category) temp", nativeQuery = true)
 	int getCategoryNum();
 
 	// 可以通过自定义的 JPQL 完成 UPDATE 和 DELETE 操作. 注意: JPQL 不支持使用 INSERT
@@ -48,5 +48,11 @@ public interface ArticleRepository extends JpaRepository<Article, Integer>, JpaS
 	@Modifying
 	@Query("UPDATE Article a SET a.flag = 0 WHERE id = :id")
 	void deleteArticle(@Param("id") Integer id);
+
+	@Query(value = "select category from article where flag = 1 group by category", nativeQuery = true)
+	ArrayList<String> getCategories();
+
+	@Query(value = "select a from Article a where category = :category and flag =1 order by id DESC")
+	ArrayList<Article> getArticleByCategory(@Param("category") String category);
 
 }
