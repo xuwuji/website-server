@@ -46,6 +46,9 @@ public class ArticleService {
 	@Transactional
 	public void update(Article article) {
 		System.out.println("UODATE ID:" + article.getId());
+		String time = Util.getDateTime(DateTime.now());
+		//System.out.println("time" + time);
+		article.setTime(time);
 		// 这里其实是可以覆盖的，如果在数据库中已经有了这么一个article记录（以id即pk来判断），则直接在此条记录上面覆盖
 		articleRepository.saveAndFlush(article);
 	}
