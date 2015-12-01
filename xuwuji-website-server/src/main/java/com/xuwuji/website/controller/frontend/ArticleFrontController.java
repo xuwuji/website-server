@@ -102,9 +102,10 @@ public class ArticleFrontController {
 
 	// get articles of a given category of a given page
 	@RequestMapping(value = "/getArticles/category/{category}/{pageNum}", method = RequestMethod.GET)
-	public @ResponseBody ArrayList<Article> getArticlesByCategories(@PathVariable("category") final String category,
-			@PathVariable("pageNum") int pageNum) {
-		ArrayList<Article> list = articleRepository.getArticleByCategory(category);
+	public @ResponseBody ArrayList<Article> getArticlesByCategoriesWithPage(
+			@PathVariable("category") final String category, @PathVariable("pageNum") int pageNum) {
+		// ArrayList<Article> list =
+		// articleRepository.getArticleByCategory(category);
 		// order:latest articles show first
 		Order Order = new Order(Direction.DESC, "id");
 		Sort sort = new Sort(Order);
@@ -120,7 +121,24 @@ public class ArticleFrontController {
 				return null;
 			}
 		}, pageable);
+		return (ArrayList<Article>) result.getContent();
+	}
+
+	// get all articles of a given category
+	@RequestMapping(value = "/getArticles/category/{category}", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<Article> getArticlesByCategoriesWithPage(@PathVariable("category") String category) {
+		ArrayList<Article> list = articleRepository.getArticleByCategory(category);
 		return list;
+	}
+
+	@RequestMapping(value = "/detail/{article_id}", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	public ModelAndView getDetailPage(@PathVariable("article_id") int article_id) {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("/article/article_detail");
+		Article result = articleRepository.getById(article_id);
+		model.addObject("article", result);
+		return model;
 	}
 
 	@RequestMapping(value = "/index.html", method = RequestMethod.GET)

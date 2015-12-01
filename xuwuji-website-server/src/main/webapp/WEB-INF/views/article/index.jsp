@@ -45,13 +45,13 @@
 			<div class="col-sm-8 blog-main">
 				<div id="content_div"></div>
 				<div class="col-sm-8 blog-main">
-					  <nav>
-            <ul class="pager">
-              <li><a id="previous_page" onclick='previousPage()'>Previous</a></li>
-              <span id='current_page'></span>
-              <li><a id="next_page" onclick='nextPage()'>Next</a></li>
-            </ul>
-          </nav>
+					<nav id="nav_id">
+					<ul class="pager">
+						<li><a id="previous_page" onclick='previousPage()'>Previous</a></li>
+						<span id='current_page'></span>
+						<li><a id="next_page" onclick='nextPage()'>Next</a></li>
+					</ul>
+					</nav>
 
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 					</ol>
 				</div>
 				<div class="sidebar-module">
-					<h4>Elsewhere</h4>
+					<h4>Category</h4>
 					<ol class="list-unstyled" id="categories_li">
 					</ol>
 				</div>
@@ -128,16 +128,17 @@
 										data,
 										function(i, article) {
 											//console.log(article.title);
-
+											var href = 'http://localhost:8080/xuwuji-website-server/api/article/front/detail/'
+													+ article.id
 											content
-													.append('<!-- one article begins here...--><div class=\"blog-post\"><h5 class="blog-post-title">'
+													.append('<!-- one article begins here...--><div class=\"blog-post\"><a href=\''+href+'\'><h5 class="blog-post-title">'
 															+ article.title
-															+ '</h5><p class="blog-post-meta">'
+															+ '</h5></a><p class="blog-post-meta">'
 															+ article.time
 															+ '&emsp;&emsp;&emsp;<a href="#">'
 															+ article.category
 															+ '</a></p><p>'
-															+ article.content
+															+article.content.split("</p>")[0]+article.content.split("</p>")[1]+"<br><br><br>......"
 															+ '</p></div><hr><!-- one article ends here... -->');
 
 										});
@@ -147,19 +148,27 @@
 					});
 	setInfo(1);
 
+//get the categories
 	$
 			.getJSON(
 					'http://localhost:8080/xuwuji-website-server/api/article/front/getInfo/categories',
 					function(data) {
-						console.log(data);
+						//console.log(data);
 						var category_line = new StringBuffer();
-						$.each(data, function(index, category) {
-							console.log('category:' + category);
-							if (typeof category != 'undefined') {
-								category_line.append('<li><a onclick="getArticlesByCategory('+category+')">'
-										+ category + '</a></li>');
-							}
-						});
+						$
+								.each(
+										data,
+										function(index, category) {
+											//console.log('category:' + category);
+											
+												category_line
+														.append('<li><a onclick="getArticlesByCategory(\''
+																+ category
+																+ '\')">'
+																+ category
+																+ '</a></li>');
+											
+										});
 						var $categories_li = $('#categories_li');
 						// console.log(category_line.toString());
 						$categories_li.html(category_line.toString());
@@ -194,15 +203,17 @@
 									.each(
 											data,
 											function(index, article) {
+												var href = 'http://localhost:8080/xuwuji-website-server/api/article/front/detail/'
+														+ article.id
 												line
-														.append('<!-- one article begins here...--><div class=\"blog-post\"><h5 class="blog-post-title">'
+														.append('<!-- one article begins here...--><div class=\"blog-post\"><a href=\''+href+'\'><h5 class="blog-post-title">'
 																+ article.title
-																+ '</h5><p class="blog-post-meta">'
+																+ '</h5><a><p class="blog-post-meta">'
 																+ article.time
 																+ '&emsp;&emsp;&emsp;<a href="#">'
 																+ article.category
 																+ '</a></p><p>'
-																+ article.content
+																+article.content.split("</p>")[0]+article.content.split("</p>")[1]+"<br><br><br>......"
 																+ '</p></div><hr><!-- one article ends here... -->');
 											});
 							//console.log(line.toString());
@@ -246,7 +257,7 @@
 	}
 	/* show a next article page function ends here ...*/
 
-/* show article pages of a category function starts here ...*/
+	/* show article pages of a category function starts here ...*/
 
 	function getArticlesByCategory(category) {
 		$
@@ -267,11 +278,12 @@
 																+ '&emsp;&emsp;&emsp;<a href="#">'
 																+ article.category
 																+ '</a></p><p>'
-																+ article.content
+																+article.content.split("</p>")[0]+article.content.split("</p>")[1]+"<br><br><br>......"
 																+ '</p></div><!-- one article ends here... -->');
 											});
 							var $content_div = $('#content_div');
 							$content_div.html(line.toString());
+							$('#nav_id').text("");
 						});
 	}
 
