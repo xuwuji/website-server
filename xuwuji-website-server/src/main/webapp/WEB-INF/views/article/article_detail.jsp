@@ -95,12 +95,10 @@
 					<br> Say something:<br>
 					<div class="input-group">
 						<input class="form-control" placeholder="Add a comment ;)"
-							type="text"> <span class="input-group-addon"> <a
-							href="#" onclick=""><i class="fa fa-edit"></i></a>
+							type="text" id="new_comment_content"> <span class="input-group-addon"> <button onclick="add_comment()"><i class="fa fa-edit"></i></button>
 						</span>
 					</div>
 					<br>
-					<button onclick="add_comment()">submit</button>
 				</div>
 
 				<!--add comment ENDS HERE....-->
@@ -247,7 +245,7 @@
 					</p>
 				</div>
 				<div class="sidebar-module">
-					<h4>Archives</h4>
+					<h4>Related</h4>
 					<ol class="list-unstyled">
 						<li><a href="#">March 2014</a></li>
 						<li><a href="#">February 2014</a></li>
@@ -357,7 +355,7 @@
 		console.log(value);
 		$.getJSON(url, function(data) {
 			console.log("value");
-			$up_place.text(value);
+			$up_place.html("<i class=\"fa fa-thumbs-up icon\"></i>"+value);
 		});
 	}
 </script>
