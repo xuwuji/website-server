@@ -3,22 +3,22 @@ package com.xuwuji.website.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
-@Table(name = "COMMENT")
+@Table
 @Entity
 public class Comment {
-
+	@Id
+	@GeneratedValue
 	private int id;
 	private String content;
 	private String time;
 	private String user;
+	private int up;
+
 	private int article_id;
 
-	@GeneratedValue
-	@Id
 	public int getId() {
 		return id;
 	}
@@ -51,8 +51,6 @@ public class Comment {
 		this.user = user;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "articleId",referencedColumnName="article_id")
 	public int getArticle_id() {
 		return article_id;
 	}
@@ -61,10 +59,13 @@ public class Comment {
 		this.article_id = article_id;
 	}
 
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", time=" + time + ", user=" + user + ", article_id="
-				+ article_id + "]";
+	public int getUp() {
+		return up;
 	}
+
+	public void setUp(int up) {
+		this.up = up;
+	}
+
 
 }

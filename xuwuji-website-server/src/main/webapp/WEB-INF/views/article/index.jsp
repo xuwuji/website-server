@@ -17,10 +17,6 @@
 	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/RequestUrl.js"></script>
-	<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.infinitescroll.js"></script>
-	<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.masonry.min.js"></script>
 <link
 	href="${pageContext.request.contextPath}/resources/css/article_index.css"
 	rel="stylesheet" type="text/css" />
@@ -56,7 +52,7 @@
               <li><a id="next_page" onclick='nextPage()'>Next</a></li>
             </ul>
           </nav>
-					
+
 				</div>
 			</div>
 
@@ -123,7 +119,7 @@
 	/*by defualt, show the latest 10 articles starts here....*/
 	$
 			.getJSON(
-					"http://localhost:8080/xuwuji-website-server/api/article/front/getArticles/"
+					"http://localhost:8080/xuwuji-website-server/api/article/front/getArticles/page/"
 							+ "1",
 					function(data) {
 						var content = new StringBuffer();
@@ -187,7 +183,7 @@
 	/* show a perticular article page function starts here ...*/
 	function getPage(pagenumber) {
 		var line = new StringBuffer();
-		var url = 'http://localhost:8080/xuwuji-website-server/api/article/front/getArticles/'
+		var url = 'http://localhost:8080/xuwuji-website-server/api/article/front/getArticles/page/'
 				+ pagenumber;
 		//console.log(url);
 		$

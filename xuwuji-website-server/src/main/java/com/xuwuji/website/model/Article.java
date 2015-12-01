@@ -14,9 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Table(name = "ARTICLE")
+@Table
 @Entity
 public class Article {
+	@Id
+	@GeneratedValue
 	private int id;
 	private String title;
 	private String content;
@@ -26,10 +28,10 @@ public class Article {
 	private String tags;
 	// 0-> deleted 1->ok
 	private int flag;
+
+	@OneToMany(mappedBy = "article_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Comment> comments;
 
-	@GeneratedValue
-	@Id
 	public Integer getId() {
 		return id;
 	}
@@ -99,12 +101,16 @@ public class Article {
 		this.flag = flag;
 	}
 
+	public void addComment(Comment comment) {
+		if (!comments.contains(comment)) {
+			comments.add(comment);
+		}
+	}
+
 	public List<Comment> getComments() {
 		return comments;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "article_id")
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
