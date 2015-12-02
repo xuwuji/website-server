@@ -275,16 +275,6 @@
 
 </body>
 <script type="text/javascript">
-	function StringBuffer() {
-		this.__strings__ = [];
-	};
-	StringBuffer.prototype.append = function(str) {
-		this.__strings__.push(str);
-	};
-	StringBuffer.prototype.toString = function() {
-		return this.__strings__.join('');
-	};
-
 	window.onload = getComment();
 
 	function add_comment() {
